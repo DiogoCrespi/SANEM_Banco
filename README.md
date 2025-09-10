@@ -9,14 +9,12 @@
 - `docker/init.sql`: cria o schema (tabelas) no banco `sanem`
 
 ## Subir o banco
-No diretório do projeto (`C:\SANEN\SANEN` no Windows):
+No diretório do projeto (`.\SANEN` no Windows):
 
 ```powershell
 # Subir containers
 docker compose up -d
 
-# (Opcional) Aguardar ficar pronto
-for ($i=0; $i -lt 30; $i++) { docker exec sanem-postgres pg_isready -U postgres -d sanem; if ($LASTEXITCODE -eq 0) { break }; Start-Sleep -Seconds 2 }
 ```
 
 Isso criará o container `sanem-postgres` com:
