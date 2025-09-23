@@ -85,3 +85,9 @@ Credenciais padrão são apenas para desenvolvimento. Em produção, use variáv
 2. Rode: `docker-compose up -d`
 3. O banco será inicializado automaticamente com os dados do arquivo `init.sql`
 
+## Tecnologias Utilizadas
+- Docker
+- PostgreSQL
+- GitHub
+- MySQL
+
