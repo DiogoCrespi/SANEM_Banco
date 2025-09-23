@@ -32,7 +32,7 @@ docker compose up -d
 | Rebeca Garcia    | Scrum Master          | Coordenação de equipe e facilitadora do Scrum    |
 | Matheus Castilho | Dev Team – Backend    | Banco de dados e API REST                        |
 | Diogo Crespi     | Dev Team – Frontend   | Interface web responsiva                         |
-| João Vitor       | Dev Team – Full Stack | Integração de módulos e testes                   |
+| João Victor      | Dev Team – Full Stack | Integração de módulos e testes                   |
 
 Isso criará o container `sanem-postgres` com:
 - Usuário: `postgres`
