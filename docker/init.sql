@@ -95,3 +95,24 @@ CREATE TABLE IF NOT EXISTS descarte (
     dt_descarte TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     motivo VARCHAR(150)
 );
+
+-- =========================
+-- Usuários de exemplo
+-- =========================
+INSERT INTO usuarios (nome, email) VALUES 
+('Maria Teste', 'maria@teste.com'),
+('João Exemplo', 'joao@exemplo.com');
+
+-- =========================
+-- Itens de exemplo
+-- =========================
+INSERT INTO itens (nome, quantidade) VALUES
+('Caderno', 50),
+('Caneta', 200);
+
+-- =========================
+-- Retiradas de exemplo
+-- =========================
+INSERT INTO retiradas (usuario_id, item_id, quantidade) VALUES
+(1, 2, 5),
+(2, 1, 2);
