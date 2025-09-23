@@ -11,9 +11,10 @@ Repositório do SANEN: ambiente Docker para PostgreSQL com schema, dados de exem
 - `docker/init.sql`: cria o schema (tabelas) no banco `sanem`
 
 ## Equipe
-- Nome 1 (função)
-- Nome 2 (função)
-- Nome 3 (função)
+- Rebeca Garcia — Scrum Master
+- Matheus Castilho — Dev Team (Backend)
+- Diogo Crespi — Dev Team (Frontend)
+- João Vitor — Dev Team (Full Stack)
 
 ## Subir o banco
 No diretório do projeto (`.\SANEN` no Windows):
@@ -23,6 +24,15 @@ No diretório do projeto (`.\SANEN` no Windows):
 docker compose up -d
 
 ```
+
+## Integrantes e Papéis no Scrum
+
+| Nome             | Papel Scrum           | Especialidade no Time de Desenvolvimento         |
+|------------------|-----------------------|--------------------------------------------------|
+| Rebeca Garcia    | Scrum Master          | Coordenação de equipe e facilitadora do Scrum    |
+| Matheus Castilho | Dev Team – Backend    | Banco de dados e API REST                        |
+| Diogo Crespi     | Dev Team – Frontend   | Interface web responsiva                         |
+| João Vitor       | Dev Team – Full Stack | Integração de módulos e testes                   |
 
 Isso criará o container `sanem-postgres` com:
 - Usuário: `postgres`
