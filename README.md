@@ -14,7 +14,7 @@ Repositório do SANEN: ambiente Docker para PostgreSQL com schema, dados de exem
 - Rebeca Garcia — Scrum Master
 - Matheus Castilho — Dev Team (Backend)
 - Diogo Crespi — Dev Team (Frontend)
-- João Vitor — Dev Team (Full Stack)
+- João Victor — Dev Team (Full Stack)
 
 ## Subir o banco
 No diretório do projeto (`.\SANEN` no Windows):
@@ -32,7 +32,7 @@ docker compose up -d
 | Rebeca Garcia    | Scrum Master          | Coordenação de equipe e facilitadora do Scrum    |
 | Matheus Castilho | Dev Team – Backend    | Banco de dados e API REST                        |
 | Diogo Crespi     | Dev Team – Frontend   | Interface web responsiva                         |
-| João Vitor       | Dev Team – Full Stack | Integração de módulos e testes                   |
+| João Victor      | Dev Team – Full Stack | Integração de módulos e testes                   |
 
 Isso criará o container `sanem-postgres` com:
 - Usuário: `postgres`
