@@ -25,6 +25,13 @@ docker compose up -d
 
 ```
 
+## Como contribuir
+1. Crie sua branch: `git checkout -b feature/nome`
+2. Faça commits descritivos: `git commit -m "feat: minha alteração"`
+3. Envie para o GitHub: `git push origin feature/nome`
+4. Abra um Pull Request
+
+
 ## Integrantes e Papéis no Scrum
 
 | Nome             | Papel Scrum           | Especialidade no Time de Desenvolvimento         |
@@ -80,14 +87,13 @@ Os dados ficam no volume Docker `sanen_db_data`. O comando `down -v` apaga esse 
 ## Segurança (dev)
 Credenciais padrão são apenas para desenvolvimento. Em produção, use variáveis seguras e políticas de acesso.
 
-## Como executar com Docker
-1. Instale o Docker e o Docker Compose
-2. Rode: `docker-compose up -d`
-3. O banco será inicializado automaticamente com os dados do arquivo `init.sql`
-
 ## Tecnologias Utilizadas
 - Docker
 - PostgreSQL
 - GitHub
 - MySQL
 
+## Como executar com Docker
+1. Instale o Docker e o Docker Compose
+2. Rode: `docker-compose up -d`
+3. O banco será inicializado automaticamente com os dados do arquivo `init.sql`
