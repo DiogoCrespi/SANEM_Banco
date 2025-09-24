@@ -78,4 +78,6 @@ Os dados ficam no volume Docker `sanen_db_data`. O comando `down -v` apaga esse 
 - Script não rodou: rode um reset (down -v; up -d). O `init.sql` roda somente na primeira inicialização do volume de dados.
 
 ## Segurança (dev)
-Credenciais padrão são apenas para desenvolvimento. Em produção, use variáveis seguras e políticas de acesso.
+Utilizadas variáveis de ambiente para gerenciar segredos.
+Foi criado um arquivo chamado .env na raiz do projeto e adicionado ao .gitignore para não enviá-lo ao repositório.
+Após atualizar o docker-copose.yml, as credenciais serão gerenciadas fora do controle de versão, e cada ambiente (desenvolvimento, homologação, produção) pode ter seu próprio arquivo .env.
