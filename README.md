@@ -6,9 +6,14 @@ Repositório do SANEN: ambiente Docker para PostgreSQL com schema, dados de exem
 - Docker Desktop (Windows/macOS/Linux)
 - PowerShell (Windows) ou terminal compatível
 
-## Estrutura do projeto
-- `docker-compose.yml`: sobe o PostgreSQL e aplica o script de inicialização
-- `docker/init.sql`: cria o schema (tabelas) no banco `sanem`
+### 📂 Estrutura do Projeto
+
+.
+├── docker/
+│   └── init.sql    # Script de inicialização do banco (criação de tabelas e inserção de dados)
+├── .gitignore      # Arquivos e pastas ignorados pelo Git
+├── docker-compose.yml # Orquestrador dos containers Docker
+└── README.md       # Este arquivo
 
 ## Equipe
 - Rebeca Garcia — Scrum Master
