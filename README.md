@@ -73,7 +73,7 @@ docker compose up -d
 Os dados ficam no volume Docker `sanen_db_data`. O comando `down -v` apaga esse volume.
 
 ## Solução de problemas
-- Docker não inicia / erro de compose: abra o Docker Desktop e tente novamente.
+- Docker não inicia / erro de compose: verificar se o Docker Desktop está em execução e se o arquivo docker-compose.yml está no diretório correto.
 - Porta 5432 ocupada: altere a porta no `docker-compose.yml`.
 - Script não rodou: rode um reset (down -v; up -d). O `init.sql` roda somente na primeira inicialização do volume de dados.
 
