@@ -1,0 +1,25 @@
+HTTP/1.1 400 Bad Request
+Vary: Origin
+Access-Control-Allow-Credentials: true
+Access-Control-Expose-Headers: Content-Disposition,X-CSRF-Token
+X-Content-Type-Options: nosniff
+Referrer-Policy: no-referrer-when-downgrade
+Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: DENY
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 1; mode=block
+Permissions-Policy: camera=(), microphone=(), geolocation=()
+Content-Type: application/json; charset=utf-8
+Content-Length: 102
+ETag: W/"66-SUGvbnq3mTvrybCl5acTxsRYt/o"
+Date: Mon, 01 Dec 2025 16:57:33 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"statusCode":400,"timestamp":"2025-12-01T16:57:33.979Z","path":"/auth/login","message":"Bad Request"}

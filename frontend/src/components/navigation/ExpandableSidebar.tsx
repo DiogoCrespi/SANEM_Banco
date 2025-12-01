@@ -154,6 +154,13 @@ const ExpandableSidebar: React.FC<ExpandableSidebarProps> = ({
           emptyMessage: 'Não há distribuições cadastradas.',
         },
       },
+      {
+        id: 'audit',
+        icon: 'history',
+        iconFamily: 'MaterialCommunityIcons',
+        label: 'Auditoria',
+        route: 'Auditoria',
+      },
     ];
 
     // Adicionar itens específicos por role

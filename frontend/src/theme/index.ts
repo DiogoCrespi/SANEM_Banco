@@ -1,7 +1,7 @@
 /**
  * Exportação principal do tema da aplicação Solidários
  */
-import colors from "./colors";
+import colors, { darkColors, lightColors } from "./colors";
 import spacing from "./spacing";
 import typography, { applyTextStyle, fontFamily } from "./typography";
 
@@ -60,9 +60,9 @@ const shadows = {
   },
 } as const;
 
-// Tema completo
-const theme = {
-  colors,
+// Tema claro (padrão)
+const lightTheme = {
+  colors: lightColors,
   spacing,
   typography,
   borderRadius,
@@ -71,6 +71,19 @@ const theme = {
   applyTextStyle,
 };
 
-export type Theme = typeof theme;
+// Tema escuro
+const darkTheme = {
+  colors: darkColors,
+  spacing,
+  typography,
+  borderRadius,
+  shadows,
+  fontFamily,
+  applyTextStyle,
+};
 
-export default theme;
+export type Theme = typeof lightTheme;
+
+export { lightTheme, darkTheme };
+
+export default lightTheme;

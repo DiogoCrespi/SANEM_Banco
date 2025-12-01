@@ -3,7 +3,7 @@
  * Baseado no guia de estilo visual fornecido
  */
 
-export const colors = {
+export const lightColors = {
   // Cores Primárias
   primary: {
     main: "#173F5F", // Azul Marinho - cor principal
@@ -73,4 +73,38 @@ export const colors = {
   },
 };
 
-export default colors;
+// Versão escura (valores simples — ajustar conforme o design)
+export const darkColors = {
+  primary: {
+    main: "#9FB8D6",
+    secondary: "#6BD1B0",
+    accent: "#E0C76A",
+  },
+  neutral: {
+    white: "#0B1220",
+    lightGray: "#0F1724",
+    mediumGray: "#1F2A36",
+    darkGray: "#9AA7B7",
+    black: "#E6EEF8",
+  },
+  status: {
+    success: "#34D399",
+    error: "#F87171",
+    warning: "#FBBF24",
+    info: "#60A5FA",
+  },
+  badges: {
+    available: { background: "#08312A", text: "#A7F3D0" },
+    reserved: { background: "#3B2F00", text: "#FDE68A" },
+    distributed: { background: "#2B0E0E", text: "#FECACA" },
+    lowStock: { background: "#3B2F00", text: "#FDE68A" },
+  },
+  notifications: {
+    success: { background: "#052E1C", icon: "#10B981", text: "#A7F3D0" },
+    error: { background: "#2A0C0C", icon: "#DC2626", text: "#FECACA" },
+    warning: { background: "#2A2106", icon: "#F59E0B", text: "#FDE68A" },
+    info: { background: "#07112B", icon: "#3B82F6", text: "#BFDBFE" },
+  },
+};
+
+export default lightColors;

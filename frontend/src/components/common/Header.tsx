@@ -8,7 +8,8 @@ import {
   StatusBar,
 } from "react-native";
 import Typography from "./Typography";
-import theme from "../../theme";
+import baseTheme from "../../theme";
+import { useTheme } from "../../theme/ThemeProvider";
 
 export interface HeaderProps {
   title: string;
@@ -30,18 +31,23 @@ const Header: React.FC<HeaderProps> = ({
   rightComponent,
   onBackPress,
   style,
-  backgroundColor = theme.colors.primary.main,
-  titleColor = theme.colors.neutral.white,
-  subtitleColor = theme.colors.neutral.white + "CC", // 80% opacity
+  backgroundColor,
+  titleColor,
+  subtitleColor,
   elevated = true,
 }) => {
+  const { theme: currentTheme } = useTheme();
+  const effectiveBackground = backgroundColor ?? currentTheme.colors.primary.main;
+  const effectiveTitleColor = titleColor ?? currentTheme.colors.neutral.white;
+  const effectiveSubtitleColor =
+    subtitleColor ?? currentTheme.colors.neutral.white + "CC";
   return (
     <>
-      <StatusBar backgroundColor={backgroundColor} barStyle="light-content" />
+      <StatusBar backgroundColor={effectiveBackground} barStyle="light-content" />
       <View
         style={[
           styles.container,
-          { backgroundColor },
+          { backgroundColor: effectiveBackground },
           elevated && styles.elevated,
           style,
         ]}
@@ -55,7 +61,7 @@ const Header: React.FC<HeaderProps> = ({
               style={styles.backButton}
               activeOpacity={0.7}
             >
-              <BackIcon color={titleColor} />
+              <BackIcon color={effectiveTitleColor} />
             </TouchableOpacity>
           ) : null}
         </View>
@@ -63,7 +69,7 @@ const Header: React.FC<HeaderProps> = ({
         <View style={styles.titleContainer}>
           <Typography
             variant="h3"
-            color={titleColor}
+            color={effectiveTitleColor}
             style={styles.title}
             numberOfLines={1}
           >
@@ -72,7 +78,7 @@ const Header: React.FC<HeaderProps> = ({
           {subtitle && (
             <Typography
               variant="small"
-              color={subtitleColor}
+              color={effectiveSubtitleColor}
               style={styles.subtitle}
               numberOfLines={1}
             >
@@ -117,10 +123,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     height: 56,
-    paddingHorizontal: theme.spacing.s,
+    paddingHorizontal: baseTheme.spacing.s,
   },
   elevated: {
-    ...theme.shadows.medium,
+    ...baseTheme.shadows.medium,
     elevation: 4,
   },
   leftContainer: {
@@ -130,7 +136,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
   backButton: {
-    padding: theme.spacing.xxs,
+    padding: baseTheme.spacing.xxs,
   },
   titleContainer: {
     flex: 1,

@@ -7,7 +7,8 @@ import {
   ViewStyle,
 } from "react-native";
 import Typography from "./Typography";
-import theme from "../../theme";
+import baseTheme from "../../theme";
+import { useTheme } from "../../theme/ThemeProvider";
 
 export interface CardProps {
   title?: string;
@@ -54,14 +55,23 @@ const Card: React.FC<CardProps> = ({
     style,
   ];
 
+  const { theme: currentTheme } = useTheme();
+  const dynamicCardColors = {
+    backgroundColor: currentTheme.colors.neutral.white,
+    borderColor: currentTheme.colors.neutral.mediumGray,
+  } as any;
+  const headerBorderColor = currentTheme.colors.neutral.mediumGray;
+  const footerBorderColor = currentTheme.colors.neutral.mediumGray;
+
   return (
     <Container
-      style={cardStyles}
+      style={[cardStyles, dynamicCardColors]}
       onPress={onPress}
       activeOpacity={onPress ? 0.7 : 1}
     >
+      {/* dynamic theme-aware colors applied via Typography and wrapper styles */}
       {(title || subtitle || rightHeaderContent) && (
-        <View style={[styles.header, headerStyle]}>
+        <View style={[styles.header, headerStyle, { borderBottomColor: headerBorderColor }]}>
           <View style={styles.headerTextContainer}>
             {title && (
               <Typography variant="h4" style={styles.title}>
@@ -82,30 +92,30 @@ const Card: React.FC<CardProps> = ({
 
       <View style={[styles.content, contentStyle]}>{children}</View>
 
-      {footer && <View style={styles.footer}>{footer}</View>}
+      {footer && <View style={[styles.footer, { borderTopColor: footerBorderColor }]}>{footer}</View>}
     </Container>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: theme.colors.neutral.white,
-    borderRadius: theme.borderRadius.medium,
+    backgroundColor: baseTheme.colors.neutral.white,
+    borderRadius: baseTheme.borderRadius.medium,
     borderWidth: 1,
-    borderColor: theme.colors.neutral.mediumGray,
+    borderColor: baseTheme.colors.neutral.mediumGray,
     overflow: "hidden",
   },
   elevationNone: {
     // Sem sombra
   },
   elevationSmall: {
-    ...theme.shadows.small,
+    ...baseTheme.shadows.small,
   },
   elevationMedium: {
-    ...theme.shadows.medium,
+    ...baseTheme.shadows.medium,
   },
   elevationLarge: {
-    ...theme.shadows.large,
+    ...baseTheme.shadows.large,
   },
   fullWidth: {
     width: "100%",
@@ -114,9 +124,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    padding: theme.spacing.s,
+    padding: baseTheme.spacing.s,
     borderBottomWidth: 1,
-    borderBottomColor: theme.colors.neutral.mediumGray,
+    borderBottomColor: baseTheme.colors.neutral.mediumGray,
   },
   headerTextContainer: {
     flex: 1,
@@ -128,15 +138,15 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   rightHeaderContent: {
-    marginLeft: theme.spacing.xs,
+    marginLeft: baseTheme.spacing.xs,
   },
   content: {
-    padding: theme.spacing.s,
+    padding: baseTheme.spacing.s,
   },
   footer: {
-    padding: theme.spacing.s,
+    padding: baseTheme.spacing.s,
     borderTopWidth: 1,
-    borderTopColor: theme.colors.neutral.mediumGray,
+    borderTopColor: baseTheme.colors.neutral.mediumGray,
   },
 });
 

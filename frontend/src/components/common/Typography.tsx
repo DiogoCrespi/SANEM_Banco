@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, TextProps, StyleSheet, StyleProp, TextStyle } from 'react-native';
-import theme from '../../theme';
+import baseTheme from '../../theme';
+import { useTheme } from '../../theme/ThemeProvider';
 
 export type TypographyVariant = 
   | 'h1' 
@@ -27,9 +28,13 @@ const Typography: React.FC<TypographyProps> = ({
   children,
   ...rest
 }) => {
+  const { theme: currentTheme } = useTheme();
+
+  const computedColor = color ?? currentTheme.typography[variant]?.color ?? currentTheme.colors.neutral.black;
+
   const textStyles = [
     styles[variant],
-    color && { color },
+    { color: computedColor },
     center && styles.center,
     style,
   ];
@@ -43,53 +48,46 @@ const Typography: React.FC<TypographyProps> = ({
 
 const styles = StyleSheet.create({
   h1: {
-    fontSize: theme.typography.h1.fontSize,
-    fontFamily: theme.fontFamily.primary,
-    fontWeight: theme.typography.h1.fontWeight,
-    color: theme.typography.h1.color,
-    lineHeight: theme.typography.h1.lineHeight,
+    fontSize: baseTheme.typography.h1.fontSize,
+    fontFamily: baseTheme.fontFamily.primary,
+    fontWeight: baseTheme.typography.h1.fontWeight,
+    lineHeight: baseTheme.typography.h1.lineHeight,
   },
   h2: {
-    fontSize: theme.typography.h2.fontSize,
-    fontFamily: theme.fontFamily.primary,
-    fontWeight: theme.typography.h2.fontWeight,
-    color: theme.typography.h2.color,
-    lineHeight: theme.typography.h2.lineHeight,
+    fontSize: baseTheme.typography.h2.fontSize,
+    fontFamily: baseTheme.fontFamily.primary,
+    fontWeight: baseTheme.typography.h2.fontWeight,
+    lineHeight: baseTheme.typography.h2.lineHeight,
   },
   h3: {
-    fontSize: theme.typography.h3.fontSize,
-    fontFamily: theme.fontFamily.primary,
-    fontWeight: theme.typography.h3.fontWeight,
-    color: theme.typography.h3.color,
-    lineHeight: theme.typography.h3.lineHeight,
+    fontSize: baseTheme.typography.h3.fontSize,
+    fontFamily: baseTheme.fontFamily.primary,
+    fontWeight: baseTheme.typography.h3.fontWeight,
+    lineHeight: baseTheme.typography.h3.lineHeight,
   },
   h4: {
-    fontSize: theme.typography.h4.fontSize,
-    fontFamily: theme.fontFamily.primary,
-    fontWeight: theme.typography.h4.fontWeight,
-    color: theme.typography.h4.color,
-    lineHeight: theme.typography.h4.lineHeight,
+    fontSize: baseTheme.typography.h4.fontSize,
+    fontFamily: baseTheme.fontFamily.primary,
+    fontWeight: baseTheme.typography.h4.fontWeight,
+    lineHeight: baseTheme.typography.h4.lineHeight,
   },
   body: {
-    fontSize: theme.typography.body.fontSize,
-    fontFamily: theme.fontFamily.primary,
-    fontWeight: theme.typography.body.fontWeight,
-    color: theme.typography.body.color,
-    lineHeight: theme.typography.body.lineHeight,
+    fontSize: baseTheme.typography.body.fontSize,
+    fontFamily: baseTheme.fontFamily.primary,
+    fontWeight: baseTheme.typography.body.fontWeight,
+    lineHeight: baseTheme.typography.body.lineHeight,
   },
   bodySecondary: {
-    fontSize: theme.typography.bodySecondary.fontSize,
-    fontFamily: theme.fontFamily.primary,
-    fontWeight: theme.typography.bodySecondary.fontWeight,
-    color: theme.typography.bodySecondary.color,
-    lineHeight: theme.typography.bodySecondary.lineHeight,
+    fontSize: baseTheme.typography.bodySecondary.fontSize,
+    fontFamily: baseTheme.fontFamily.primary,
+    fontWeight: baseTheme.typography.bodySecondary.fontWeight,
+    lineHeight: baseTheme.typography.bodySecondary.lineHeight,
   },
   small: {
-    fontSize: theme.typography.small.fontSize,
-    fontFamily: theme.fontFamily.primary,
-    fontWeight: theme.typography.small.fontWeight,
-    color: theme.typography.small.color,
-    lineHeight: theme.typography.small.lineHeight,
+    fontSize: baseTheme.typography.small.fontSize,
+    fontFamily: baseTheme.fontFamily.primary,
+    fontWeight: baseTheme.typography.small.fontWeight,
+    lineHeight: baseTheme.typography.small.lineHeight,
   },
   center: {
     textAlign: 'center',

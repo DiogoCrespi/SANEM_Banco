@@ -10,7 +10,8 @@ import {
   ViewStyle,
   TextStyle
 } from 'react-native';
-import theme from '../../theme';
+import baseTheme from '../../theme';
+import { useTheme } from '../../theme/ThemeProvider';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'accent';
 export type ButtonSize = 'small' | 'medium' | 'large';
@@ -41,6 +42,26 @@ const Button: React.FC<ButtonProps> = ({
   textStyle,
   ...rest
 }) => {
+  const { theme: currentTheme } = useTheme();
+
+  // dynamic colors based on theme
+  const variantBackground =
+    variant === 'primary'
+      ? currentTheme.colors.primary.secondary
+      : variant === 'accent'
+      ? currentTheme.colors.primary.accent
+      : 'transparent';
+
+  const variantBorderColor =
+    variant === 'secondary' ? currentTheme.colors.primary.main : undefined;
+
+  const variantTextColor =
+    variant === 'primary'
+      ? currentTheme.colors.neutral.white
+      : variant === 'secondary'
+      ? currentTheme.colors.primary.main
+      : currentTheme.colors.neutral.black;
+
   const buttonStyles = [
     styles.base,
     styles[variant],
@@ -60,7 +81,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <TouchableOpacity
-      style={buttonStyles}
+      style={[buttonStyles, { backgroundColor: variantBackground, borderColor: variantBorderColor }]}
       disabled={disabled || loading}
       activeOpacity={0.8}
       {...rest}
@@ -70,11 +91,11 @@ const Button: React.FC<ButtonProps> = ({
         
         {loading ? (
           <ActivityIndicator 
-            color={variant === 'secondary' ? theme.colors.primary.main : theme.colors.neutral.white} 
+            color={variant === 'secondary' ? currentTheme.colors.primary.main : currentTheme.colors.neutral.white} 
             size="small" 
           />
         ) : (
-          <Text style={textStyles}>{title}</Text>
+          <Text style={[textStyles, { color: variantTextColor }]}>{title}</Text>
         )}
         
         {rightIcon && !loading && <View style={styles.rightIcon}>{rightIcon}</View>}
@@ -85,7 +106,7 @@ const Button: React.FC<ButtonProps> = ({
 
 const styles = StyleSheet.create({
   base: {
-    borderRadius: theme.borderRadius.medium,
+    borderRadius: baseTheme.borderRadius.medium,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -95,29 +116,29 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   primary: {
-    backgroundColor: theme.colors.primary.secondary, // Verde Turquesa
+    backgroundColor: baseTheme.colors.primary.secondary, // Verde Turquesa
   },
   secondary: {
     backgroundColor: 'transparent',
     borderWidth: 1,
-    borderColor: theme.colors.primary.main, // Azul Marinho
+    borderColor: baseTheme.colors.primary.main, // Azul Marinho
   },
   accent: {
-    backgroundColor: theme.colors.primary.accent, // Amarelo
+    backgroundColor: baseTheme.colors.primary.accent, // Amarelo
   },
   small: {
-    paddingVertical: theme.spacing.xxs,
-    paddingHorizontal: theme.spacing.s,
+    paddingVertical: baseTheme.spacing.xxs,
+    paddingHorizontal: baseTheme.spacing.s,
     minHeight: 32,
   },
   medium: {
-    paddingVertical: theme.spacing.xs,
-    paddingHorizontal: theme.spacing.m,
+    paddingVertical: baseTheme.spacing.xs,
+    paddingHorizontal: baseTheme.spacing.m,
     minHeight: 40,
   },
   large: {
-    paddingVertical: theme.spacing.s,
-    paddingHorizontal: theme.spacing.l,
+    paddingVertical: baseTheme.spacing.s,
+    paddingHorizontal: baseTheme.spacing.l,
     minHeight: 48,
   },
   fullWidth: {
@@ -127,17 +148,17 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   text: {
-    fontFamily: theme.fontFamily.primary,
+    fontFamily: baseTheme.fontFamily.primary,
     fontWeight: '600',
   },
   primaryText: {
-    color: theme.colors.neutral.white,
+    color: baseTheme.colors.neutral.white,
   },
   secondaryText: {
-    color: theme.colors.primary.main,
+    color: baseTheme.colors.primary.main,
   },
   accentText: {
-    color: theme.colors.neutral.black,
+    color: baseTheme.colors.neutral.black,
   },
   smallText: {
     fontSize: 12,
@@ -152,10 +173,10 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   leftIcon: {
-    marginRight: theme.spacing.xs,
+    marginRight: baseTheme.spacing.xs,
   },
   rightIcon: {
-    marginLeft: theme.spacing.xs,
+    marginLeft: baseTheme.spacing.xs,
   },
 });
 

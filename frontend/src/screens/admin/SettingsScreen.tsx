@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,
@@ -17,24 +17,26 @@ import {
   Checkbox,
   NotificationBanner,
 } from '../../components/barrelComponents';
-import theme from '../../theme';
+// theme import removed — use ThemeProvider's theme
 
 // Hooks
 import { useAuth } from '../../hooks/useAuth';
+import { useTheme } from '../../theme/ThemeProvider';
 
 const SettingsScreen: React.FC = () => {
   const { user } = useAuth();
-  const [notification, setNotification] = useState({
+  const { mode, toggleTheme, theme, setMode } = useTheme();
+
+  const [notification, setNotification] = React.useState({
     visible: false,
     message: '',
     type: 'info' as 'success' | 'error' | 'info' | 'warning',
   });
 
   // Estados para configurações
-  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
-  const [autoSync, setAutoSync] = useState(true);
-  const [biometricAuth, setBiometricAuth] = useState(false);
+  const [notificationsEnabled, setNotificationsEnabled] = React.useState(true);
+  const [autoSync, setAutoSync] = React.useState(true);
+  const [biometricAuth, setBiometricAuth] = React.useState(false);
 
   const handleSaveSettings = () => {
     setNotification({
@@ -55,9 +57,10 @@ const SettingsScreen: React.FC = () => {
           style: 'destructive',
           onPress: () => {
             setNotificationsEnabled(true);
-            setDarkMode(false);
             setAutoSync(true);
             setBiometricAuth(false);
+            // reset to light mode
+            setMode("light");
             setNotification({
               visible: true,
               message: 'Configurações resetadas!',
@@ -68,6 +71,56 @@ const SettingsScreen: React.FC = () => {
       ]
     );
   };
+
+  const styles = React.useMemo(() => StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.neutral.lightGray,
+    },
+    scrollView: {
+      flex: 1,
+      padding: theme.spacing.m,
+    },
+    sectionCard: {
+      marginBottom: theme.spacing.m,
+    },
+    sectionTitle: {
+      marginBottom: theme.spacing.m,
+      color: theme.colors.primary.main,
+    },
+    settingItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      paddingVertical: theme.spacing.s,
+    },
+    settingInfo: {
+      flex: 1,
+      marginRight: theme.spacing.m,
+    },
+    settingDivider: {
+      marginVertical: theme.spacing.sm,
+    },
+    settingButton: {
+      paddingVertical: theme.spacing.md,
+    },
+    infoItem: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingVertical: theme.spacing.s,
+    },
+    actionButtons: {
+      marginTop: theme.spacing.l,
+      marginBottom: theme.spacing.xl,
+    },
+    saveButton: {
+      marginBottom: theme.spacing.m,
+    },
+    resetButton: {
+      // Estilos específicos se necessário
+    },
+  }), [theme]);
 
   return (
     <View style={styles.container}>
@@ -108,8 +161,8 @@ const SettingsScreen: React.FC = () => {
               </Typography>
             </View>
             <Checkbox
-              checked={darkMode}
-              onToggle={() => setDarkMode(!darkMode)}
+              checked={mode === 'dark'}
+              onToggle={() => toggleTheme()}
             />
           </View>
         </Card>
@@ -231,55 +284,5 @@ const SettingsScreen: React.FC = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.neutral.lightGray,
-  },
-  scrollView: {
-    flex: 1,
-    padding: theme.spacing.m,
-  },
-  sectionCard: {
-    marginBottom: theme.spacing.m,
-  },
-  sectionTitle: {
-    marginBottom: theme.spacing.m,
-    color: theme.colors.primary.main,
-  },
-  settingItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: theme.spacing.s,
-  },
-  settingInfo: {
-    flex: 1,
-    marginRight: theme.spacing.m,
-  },
-  settingDivider: {
-    marginVertical: theme.spacing.sm,
-  },
-  settingButton: {
-    paddingVertical: theme.spacing.md,
-  },
-  infoItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: theme.spacing.s,
-  },
-  actionButtons: {
-    marginTop: theme.spacing.l,
-    marginBottom: theme.spacing.xl,
-  },
-  saveButton: {
-    marginBottom: theme.spacing.m,
-  },
-  resetButton: {
-    // Estilos específicos se necessário
-  },
-});
 
 export default SettingsScreen;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import { View, StyleSheet } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
@@ -7,6 +8,7 @@ import { store } from "./src/store";
 
 // Provedores de contexto
 import { AuthProvider } from "./src/hooks/useAuth";
+import ThemeProvider from "./src/theme/ThemeProvider";
 
 // Navegadores - Importando o MainNavigator
 import MainNavigator from "./src/navigation/MainNavigator";
@@ -59,26 +61,45 @@ export default function App() {
     <Provider store={store}>
       <SafeAreaProvider>
         <StatusBar style="auto" />
-        <AuthProvider>
-          <NotificationContext.Provider
-            value={{ showNotification, hideNotification }}
-          >
-            <NavigationContainer>
-              <MainNavigator />
-              <NotificationBanner
-                visible={notification.visible}
-                type={notification.type}
-                message={notification.message}
-                description={notification.description}
-                onClose={hideNotification}
-                position="top"
-                autoClose
-                duration={3000}
-              />
-            </NavigationContainer>
-          </NotificationContext.Provider>
-        </AuthProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <NotificationContext.Provider
+              value={{ showNotification, hideNotification }}
+            >
+              <AppInner notification={notification} hideNotification={hideNotification} />
+            </NotificationContext.Provider>
+          </AuthProvider>
+        </ThemeProvider>
       </SafeAreaProvider>
     </Provider>
   );
 }
+
+const AppInner: React.FC<any> = ({ notification, hideNotification }) => {
+  // Import here to avoid hooks outside provider
+  const { useTheme } = require("./src/theme/ThemeProvider");
+  const { theme, mode } = useTheme();
+
+  return (
+    <View style={[styles.root, { backgroundColor: theme.colors.neutral.lightGray }]}> 
+      <StatusBar style={mode === "dark" ? "light" : "dark"} />
+      <NavigationContainer>
+        <MainNavigator />
+        <NotificationBanner
+          visible={notification.visible}
+          type={notification.type}
+          message={notification.message}
+          description={notification.description}
+          onClose={hideNotification}
+          position="top"
+          autoClose
+          duration={3000}
+        />
+      </NavigationContainer>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  root: { flex: 1 },
+});
